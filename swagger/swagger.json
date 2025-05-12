@@ -1,0 +1,92 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "webshop-api",
+    "description": "API cho dịch vụ sản phẩm của cửa hàng trực tuyến",
+    "version": "1.0.0"
+  },
+
+  "paths": {
+    "/products/getAll": {
+      "get": {
+        "summary": "Lấy tất cả sản phẩm",
+        "tags": ["Products"],
+
+        "responses": {
+          "200": {
+            "description": "Danh sách sản phẩm"
+          }
+        }
+      }
+    },
+    "/products/create": {
+      "post": {
+        "summary": "Tạo sản phẩm mới",
+        "tags": ["Products"],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "description": { "type": "string" },
+                  "price": { "type": "number" },
+                  "category": { "type": "string" },
+                  "image": { "type": "string", "format": "binary" }
+                },
+                "required": [
+                  "name",
+                  "description",
+                  "price",
+                  "category",
+                  "image"
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "description": { "type": "string" },
+                  "price": { "type": "number" },
+                  "category": { "type": "string" },
+                  "image": { "type": "string", "format": "binary" }
+                },
+                "required": [
+                  "name",
+                  "description",
+                  "price",
+                  "category",
+                  "image"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Tạo thành công" }
+        }
+      }
+    },
+    "/products/delete/{id}": {
+      "delete": {
+        "summary": "Xóa sản phẩm",
+        "tags": ["Products"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Xóa thành công" },
+          "404": { "description": "Sản phẩm không tồn tại" }
+        }
+      }
+    }
+  }
+}
